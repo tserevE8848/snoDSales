@@ -1,0 +1,26 @@
+{
+  "name": "yetisales",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "api": "^3.3.1",
+    "discord.js": "^12.5.1",
+    "dotenv": "^10.0.0",
+    "ethers": "^5.4.6"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tserevE8848/YetiSales.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tserevE8848/YetiSales/issues"
+  },
+  "homepage": "https://github.com/tserevE8848/YetiSales#readme"
+}
