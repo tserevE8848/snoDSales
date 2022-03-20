@@ -14,13 +14,13 @@ client.on('ready', () => {
     });
 });
  main = async (channel) => {
-  const seconds = 3600;
-  const hoursAgo = (Math.round(new Date().getTime() / 1000) - (seconds)); // in the last hour, run hourly?
+   const currentTime = (Math.round(new Date().getTime() / 1000)); // in the last hour, run hourly?
+const seconds = 300000;
+  const hoursAgo = (Math.round(new Date().getTime()) - (seconds));
 const params = new URLSearchParams({
-    offset: '0',
-    event_type: 'successful',
+   event_type: 'successful',
     only_opensea: 'false',
-    occurred_after: hoursAgo.toString(), 
+    occurred_before: currentTime.toString(), 
     collection_slug: process.env.COLLECTION_SLUG,
   })
  let openSeaFetch = {}
@@ -33,8 +33,16 @@ const openSeaResponse = await fetch(
 	console.log(openSeaResponse);
    return Promise.all(
     openSeaResponse.asset_events.reverse().map((sale) => {
-      const message = buildMessage(sale);
-      return channel.send(message)
+       let createdDate = Date.parse(sale.created_date)
+       
+	    if (createdDate <  hoursAgo) {
+		  const message = buildMessage(sale);
+		   return channel.send(message)
+	    }
+	    else {
+ 		    const message = buildMessage(sale);
+		   return channel.send(message)
+	    }
     })
 );
 }
@@ -56,7 +64,7 @@ const buildMessage = (sale) => (
 
 // Login to Discord with your client's token
 setInterval(function(){
-   main(channel); 
-},3600 * 1000)
+  main(channel); 
+},60000 * 5)
 client.login(process.env.DISCORD_BOT_TOKEN);
 
