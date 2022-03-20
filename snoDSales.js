@@ -36,8 +36,7 @@ const openSeaResponse = await fetch(
        let createdDate = Date.parse(sale.created_date)
        
 	    if (createdDate <  hoursAgo) {
-		  const message = buildMessage(sale);
-		   return channel.send(message)
+		 
 	    }
 	    else {
  		    const message = buildMessage(sale);
